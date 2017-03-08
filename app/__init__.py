@@ -84,7 +84,7 @@ def valveHandler():
     else:
 		command = "ID not valid"
 
-	conn.close();
+    conn.close();
 
     return command
 
