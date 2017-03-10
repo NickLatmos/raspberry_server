@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask import json
 from random import randint
+import datetime
 import clientHandler 
 import json 
 import database 
@@ -87,6 +88,13 @@ def valveHandler():
     conn.close();
 
     return command
+
+@app.route('/time', methods = ['GET'])
+def getTime():
+
+    now = datetime.datetime.now()				
+    return '{"hour": %02d, "minutes": %02d, "seconds": %02d}' % (now.hour, now.minute, now.second)
+
 
 
 #This thread is responsible for incoming TCP Socket connections
