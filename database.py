@@ -1,13 +1,13 @@
 import MySQLdb
+from database_codes import *
 
 hostname = 'localhost'
-username = 'root'
-password = '1000641253'
 database = 'WEATHER'
 
 def connectToSQLDatabase():
 	print 'Using MySQL - library'
 	conn = MySQLdb.connect(host=hostname, user=username, passwd=password, db=database)
+	print 'Connected to MySQL'
 	return conn
 
 def runQuery(conn, query):
@@ -29,10 +29,10 @@ def runQuery(conn, query):
 #Returns an insert sql command.
 def buildInsertQuery(dataList, tableName):
 	try:
-		#Order: ID, DATE, TIME, TEMPERATURE, HUMIDITY 
+		#Order: ID, DATE, TIME, TEMPERATURE, HUMIDITY, PRESSURE, CASE_TEMPERATURE, WEATHER
 		if tableName == "MEASUREMENTS":
-			query = "INSERT INTO %s VALUES (\'%s\', CURDATE(), CURTIME(), %s, %s)" \
-			% (tableName, dataList[0], dataList[1], dataList[2])
+			query = "INSERT INTO %s VALUES (\'%s\', CURDATE(), CURTIME(), %s, %s, %s, %s, \'%s\')" \
+			% (tableName, dataList[0], dataList[1], dataList[2], dataList[3], dataList[4], dataList[5])
 		else:
 			query = ""
 	except (RuntimeError, TypeError, NameError):

@@ -1,9 +1,11 @@
 import sys
 import socket
+import time
 from thread import *
+from random import randint
 
 bufferSize = 1024
-host = '192.168.1.20'
+host = '192.168.1.9'
 port = 5500
 numOfClients = 5
 numOfActiveConnections = 0
@@ -11,12 +13,21 @@ numOfActiveConnections = 0
 def clientThread(conn,s):
 	global numOfActiveConnections
 	try:
-		conn.send("Welcome to the server. Type something and hit ENTER\n")
-
+		#conn.send("Welcome to the server. Type something and hit ENTER\n")
+                FLAG_RESPONSE = True
 		while True:
 			data = conn.recv(bufferSize)
-			reply = "OK..." + data
-			conn.sendall(reply)
+			if not data: 
+				break
+			print data
+                        if FLAG_RESPONSE:
+				if randint(0,1):
+					reply = "VALVE NO"
+				else:
+					reply = "VALVE NC"
+				print reply
+				conn.sendall(reply)
+				FLAG_RESPONSE = False
 			if data == 'EXIT':
 				conn.sendall("The connection is terminated.")
 				break
