@@ -22,9 +22,9 @@ def clientThread(conn,s):
 			print data
                         if FLAG_RESPONSE:
 				if randint(0,1):
-					reply = "VALVE NO"
+					reply = "VALVE NO%c" % '\a'
 				else:
-					reply = "VALVE NC"
+					reply = "VALVE NC%c" % '\a'
 				print reply
 				conn.sendall(reply)
 				FLAG_RESPONSE = False

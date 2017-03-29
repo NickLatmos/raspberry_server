@@ -71,7 +71,7 @@ def postJsonHandler():
 	    conn.close()
 
     #Return something to the browser
-    return 'Data posted\n%c' + str(content) % '\a'
+    return 'Data posted\n%c' % '\a'
 
 #----! Must change from ?id=xxx to ?place=xxx 
 @app.route('/getrecentdata', methods = ['GET'])
